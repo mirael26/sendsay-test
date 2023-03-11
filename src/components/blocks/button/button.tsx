@@ -1,4 +1,4 @@
-import { TButtonType } from '../../../types';
+import { TButtonType } from '../../../types/data-types';
 
 interface IButtonProps {
   type: TButtonType;
