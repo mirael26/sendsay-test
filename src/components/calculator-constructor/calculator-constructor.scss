@@ -1,0 +1,17 @@
+.calculator-constructor {
+  width: 695px;
+  height: 640px;
+  margin: 0 auto;
+  padding: 38px 80px 86px 76px;
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+}

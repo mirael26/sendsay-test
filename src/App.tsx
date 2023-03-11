@@ -1,4 +1,4 @@
-import CalculatorConstructor from './components/calculator-contructor/calculator-contructor';
+import CalculatorConstructor from './components/calculator-constructor/calculator-constructor';
 
 function App() {
   return (

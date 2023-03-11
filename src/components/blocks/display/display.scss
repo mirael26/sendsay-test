@@ -1,0 +1,17 @@
+.display {
+  width: 240px;
+  height: 60px;
+  padding: 4px;
+
+  &__container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 8px;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 44px;
+    color: $color-black-russian;
+    border-radius: 6px;
+    background-color: $color-solitude-2;
+  }
+}

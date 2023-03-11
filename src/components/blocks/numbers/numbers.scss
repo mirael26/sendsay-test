@@ -1,0 +1,10 @@
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding: 4px;
+
+  & > *:nth-child(10) {
+    grid-column: 1 / 3;
+  }
+}

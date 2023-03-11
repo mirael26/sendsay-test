@@ -1,10 +1,20 @@
 // global
 
 @import 'scss/fonts.scss';
-@import 'scss/reboot.scss';
 @import 'scss/utils.scss';
 @import 'scss/variables.scss';
+@import 'scss/reboot.scss';
 
 // components
 
-@import 'components/calculator-contructor/calculator-contructor.scss';
+@import 'components/blocks/button/button.scss';
+@import 'components/blocks/display/display.scss';
+@import 'components/blocks/operators/operators.scss';
+@import 'components/blocks/numbers/numbers.scss';
+@import 'components/blocks/result/result.scss';
+
+@import 'components/calculator-constructor/calculator-constructor.scss';
+@import 'components/mode-control/mode-control.scss';
+@import 'components/sidebar/sidebar.scss';
+@import 'components/calculator/calculator.scss';
+
