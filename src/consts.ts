@@ -3,3 +3,9 @@ export const Mode = {
   Constructor: 'constructor'
 } as const;
 
+export const Block = {
+  Display: 'display',
+  Operators: 'operators',
+  Numbers: 'numbers',
+  Result: 'result'
+} as const;

@@ -1,4 +1,4 @@
-import { ActionType } from '../store/reducers/action';
+import { ActionType } from '../store/action';
 import { TModeType } from './data-types';
 
 export interface IChangeMode {

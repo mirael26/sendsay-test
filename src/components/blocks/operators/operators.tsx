@@ -1,8 +1,12 @@
 import Button from '../button/button';
 
-const Operators = () => {
+interface IOperatorsProps {
+  draggable?: boolean;
+}
+
+const Operators = ({ draggable = false }: IOperatorsProps) => {
   return (
-    <div className="operators">
+    <div className="operators" id="operators" draggable={draggable}>
       <Button type={'operator'} sign={'/'}/>
       <Button type={'operator'} sign={'*'}/>
       <Button type={'operator'} sign={'-'}/>

@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   padding: 4px;
+  background-color: $color-white-default;
 
   & > *:nth-child(10) {
     grid-column: 1 / 3;

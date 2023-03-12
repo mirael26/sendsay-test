@@ -40,4 +40,29 @@
       color: $color-neon-blue;
     }
   }
+
+  &__block {
+    margin-bottom: 8px;
+  }
+
+  .highlighted {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 250px;
+      height: 6px;
+      left: -5px;
+      bottom: -5px;
+      background-image: url('../../img/highlight-line.svg');
+    }
+
+    &--before {
+      &::after {
+        bottom: inherit;
+        top: -5px;
+      }
+    }
+  }
 }

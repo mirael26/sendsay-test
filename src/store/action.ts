@@ -1,5 +1,5 @@
-import { IChangeMode } from '../../types/actions-types';
-import { TModeType } from '../../types/data-types';
+import { IChangeMode } from '../types/actions-types';
+import { TModeType } from '../types/data-types';
 
 export const ActionType = {
   ChangeMode: 'changeMode'

@@ -1,8 +1,12 @@
 import Button from '../button/button';
 
-const Numbers = () => {
+interface INumbersProps {
+  draggable?: boolean;
+}
+
+const Numbers = ({ draggable = false }: INumbersProps) => {
   return (
-    <div className="numbers">
+    <div className="numbers" id="numbers" draggable={draggable}>
       <Button type={'number'} sign={'7'}/>
       <Button type={'number'} sign={'8'}/>
       <Button type={'number'} sign={'9'}/>

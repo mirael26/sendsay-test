@@ -1,6 +1,6 @@
 import { Mode } from '../../consts';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { ActionCreator } from '../../store/reducers/action';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
+import { ActionCreator } from '../../store/action';
 import { getMode } from '../../store/selector';
 import { TModeType } from '../../types/data-types';
 

@@ -1,7 +1,7 @@
 import { Mode } from '../../consts';
 import { TConstructorAction } from '../../types/actions-types';
 import { IConstructorReducer } from '../../types/reducers-types';
-import { ActionType } from './action';
+import { ActionType } from '../action';
 
 export const initialState: IConstructorReducer = {
   mode: Mode.Constructor,
