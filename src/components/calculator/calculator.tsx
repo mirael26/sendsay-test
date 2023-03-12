@@ -131,11 +131,11 @@ const Calculator = () => {
 
   const isCalculatorEmpty = blocks.length === 0;
   const calculatorEmptyClass = isCalculatorEmpty ? ' is-empty' : '';
-  const calculableClass = mode === Mode.Runtime ? ' is-calculable' : '';
+  const runtimeMod = mode === Mode.Runtime ? ' calculator--runtime' : '';
   const isDraggable = mode === Mode.Constructor;
 
   return (
-    <div className={"calculator" + calculatorEmptyClass + calculableClass}
+    <div className={"calculator" + runtimeMod + calculatorEmptyClass}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}

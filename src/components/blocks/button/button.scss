@@ -5,13 +5,27 @@
   border: 1px solid $color-solitude-1;
   border-radius: 6px;
 
-  .is-calculable & {
-    outline: 2px solid transparent;
-    outline-offset: -2px;
-    transition: outline 0.3s ease;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  transition: outline 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    outline: 2px solid $color-neon-blue;
+  }
+
+  &:active {
+    background-color: $color-neon-blue;
+  }
+
+  &.is-disabled {
+    pointer-events: none;
 
     &:hover {
-      outline: 2px solid $color-neon-blue;
+      outline: 2px solid transparent;
+    }
+
+    &:active {
+      background-color: transparent;
     }
   }
 

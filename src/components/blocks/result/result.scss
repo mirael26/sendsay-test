@@ -14,6 +14,32 @@
     line-height: 15px;
     color: $color-white-default;
     background-color: $color-neon-blue;
+    border: 2px solid $color-neon-blue;
     border-radius: 6px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      color: $color-neon-blue;
+      background-color: rgba($color-neon-blue, 0.3);
+    }
+
+    &:active {
+      color: $color-neon-blue;
+      background-color: $color-white-default;
+    }
+  }
+
+  .is-disabled &__button {
+    pointer-events: none;
+
+    &:hover {
+      color: $color-white-default;
+      background-color: $color-neon-blue;
+    }
+
+    &:active {
+      color: $color-white-default;
+      background-color: $color-neon-blue;
+    }
   }
 }

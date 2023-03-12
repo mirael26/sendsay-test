@@ -43,6 +43,11 @@
 
   &__block {
     margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  &--runtime &__block {
+    cursor: default;
   }
 
   .highlighted {

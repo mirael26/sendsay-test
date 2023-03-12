@@ -11,6 +11,7 @@ const ModeControl = () => {
   const handleModeButtonClick = (mode: TModeType) => {
     if (currentMode !== mode) {
       dispatch(ActionCreator.ChangeMode(mode));
+      dispatch(ActionCreator.ResetCalculator());
     }
   }
 
