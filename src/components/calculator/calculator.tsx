@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Block, Mode } from '../../consts';
 import { useAppSelector } from '../../hooks/store-hooks';
 import { getMode } from '../../store/selector';
+import { getClosestBlockIndex, getIndexByElementCenter, getUpdatedBlocks } from '../../utils';
 import Display from '../blocks/display/display';
 import Numbers from '../blocks/numbers/numbers';
 import Operators from '../blocks/operators/operators';
@@ -39,54 +40,29 @@ const Calculator = () => {
     const isCalculatorEmpty = currentCalculatorElement && blocks.length === 0;
     const isOverBlock = !isCalculatorEmpty && currentBlockElement && currentBlockElement.id;
     const isOverSpace = currentElement.classList.contains('calculator') && !isCalculatorEmpty && !isOverBlock;
-
+  
     if (isCalculatorEmpty) {
       currentCalculatorElement.classList.add('is-dropped');
     }
     
     if (isOverBlock) {
-      if (druggedName === Block.Display) {
+      if (druggedName === Block.Display) { // если перетаскивается дисплей, он встает первым
         setHighlightAfter(0);
-        return;
-      }
-
-      if (currentBlockElement.id === Block.Display) {
+      } else if (currentBlockElement.id === Block.Display) { // если блок перетаскивается над дисплеем, он встает после дисплея
         setHighlightAfter(1);
-        return;
+      } else {
+        const index = getIndexByElementCenter(blocks, currentBlockElement, evt.clientY);
+        setHighlightAfter(index);
       }
-
-      let index = blocks.findIndex((block) => currentBlockElement.id === block);
-      const currentBlockElementCoord = currentBlockElement.getBoundingClientRect();
-      const currentBlockElementCenter = currentBlockElementCoord.y + currentBlockElementCoord.height / 2;
-
-      if (evt.clientY > currentBlockElementCenter) {
-        index ++;
-      }
-      setHighlightAfter(index);
     }
 
     if (isOverSpace) {
       if (druggedName === Block.Display) {
         setHighlightAfter(0);
-        return;
+      } else {
+        const index = getClosestBlockIndex(currentElement, evt.clientY);
+        setHighlightAfter(index);
       }
-
-      // если drag происходит на пустом пространстве и это не дисплей
-      // находим все дочерние элементы родителя и ищем по координатам ближайшего ребенка
-      let index;
-      const blocks = Array.from(currentElement.children);
-      blocks.forEach((block, i) => {
-        const blockCoord = block.getBoundingClientRect();
-        if (blockCoord.y > evt.clientY) {
-          index = i;
-          return;
-        }
-      });
-
-      if (!index) {
-        index = blocks.length;
-      }
-      setHighlightAfter(index);
     }
   };
 
@@ -105,24 +81,17 @@ const Calculator = () => {
     const druggedElement = document.querySelector('.selected');
     const droppedName = druggedElement?.id;
 
-    if (blocks.length === 0 && droppedName) { // если блоков нет, вставляем наш элемент
-      setBlocks([droppedName]);
-    } else if (highlightAfter !== null && droppedName) {
-      const existId = blocks.findIndex((block) => block === droppedName); // иначе проверяем, был ли уже такой элемент
+    if ((blocks.length === 0 || highlightAfter !== null) && droppedName) {
 
-      let shift = 0;
-      if (existId >= 0 && existId < highlightAfter) { // если был, и он стоит раньше новой позиции - учитываем сдвиг
-        shift = -1;
-      }
-      const newBlocks = blocks.filter((block) => block !== droppedName); // убираем старый элемент
-      newBlocks.splice(highlightAfter + shift, 0, droppedName); // вставляем новый на нужное место
+      const newBlocks = getUpdatedBlocks(blocks, droppedName, highlightAfter);
       setBlocks(newBlocks);
+
+      const parentDruggedElement = druggedElement?.parentElement;
+      if (parentDruggedElement?.classList.contains('sidebar__container')) { // если перенесли блок из сайдбара
+        parentDruggedElement.classList.add('is-disabled'); // заблокировать перенесенный блок
+      }
     }
 
-    const parentDruggedElement = druggedElement?.parentElement;
-    if (parentDruggedElement?.classList.contains('sidebar__container')) {
-      parentDruggedElement.classList.add('is-disabled');
-    }
     if (currentElement.classList.contains('is-dropped')) {
       currentElement.classList.remove('is-dropped');
     }

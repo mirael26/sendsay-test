@@ -1,4 +1,58 @@
+import { Block } from './consts';
 import { ICalculatorReducer } from './types/reducers-types';
+
+export const getIndexByElementCenter = (blocks: Array<string>, currentBlock: Element, clientY: number): number => {
+  let index = blocks.findIndex((block) => currentBlock.id === block);
+  const currentBlockCoord = currentBlock.getBoundingClientRect();
+  const currentBlockCenter = currentBlockCoord.y + currentBlockCoord.height / 2;
+
+  if (clientY > currentBlockCenter) {
+    index ++;
+  }
+  return index;
+};
+
+export const getClosestBlockIndex = (element: HTMLElement, clientY: number): number => {
+  let index;
+  const blocks = Array.from(element.children);
+  index = blocks.findIndex((block, i) => {
+    const blockCoord = block.getBoundingClientRect();
+    return blockCoord.y > clientY;
+  });
+
+  if (index === 0 && blocks[0].id === Block.Display) {
+    return 1;
+  }
+
+  return index !== -1 ? index : blocks.length;
+};
+
+export const getUpdatedBlocks = (blocks: Array<string>, newBlock: string, highlightAfter: number | null): Array<string> => {
+  if (blocks.length === 0) { // если блоков нет, вставляем наш элемент
+    return [newBlock];
+  }
+
+  if (highlightAfter !== null) {
+    const existId = blocks.findIndex((block) => block === newBlock); // иначе проверяем, был ли уже такой элемент
+
+    let shift = 0;
+    if (existId >= 0 && existId < highlightAfter) { // если был, и он стоит раньше новой позиции - учитываем сдвиг
+      shift = -1;
+    }
+
+    let newBlocks;
+    if (existId >= 0) {
+      newBlocks = blocks.filter((block) => block !== newBlock); // убираем старый элемент, если он был
+    } else {
+      newBlocks = blocks.slice(); // либо просто копируем исходный массив
+    }
+
+    newBlocks.splice(highlightAfter + shift, 0, newBlock); // вставляем новый на нужное место
+    return newBlocks;
+  }
+
+  return blocks;
+};
 
 export const formatResult = (result: string | number) => {
   if (result === Infinity) {

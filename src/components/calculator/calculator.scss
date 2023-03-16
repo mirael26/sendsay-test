@@ -61,6 +61,7 @@
       left: -5px;
       bottom: -5px;
       background-image: url('../../img/highlight-line.svg');
+      pointer-events: none;
     }
 
     &--before {
